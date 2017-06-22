@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html>
+    <title>"Signup"</title>
+    <body>
+        <h1>{{title}}</h1>
+        {# note:the statement for controling the errors from users should be in this template#}
+        {% if username == "" and password == ""  and verification == "" %}
+            <p>Please enter the informaiton needed</p>
+        {% elif " " in username or username|length > 20 or username|length < 3 %}
+            <p>The username should be not contain the whitespace and the length should be in 3 to 20 characters</p>
+        {% elif password != verification %}
+            <p>The password you entered is not matching</p>
+        {% elif " " in password or password|length > 20 or password|length < 3 %}
+            <p>The password should be not contain the whitespace and the length should be in 3 to 20 characters</p>
+        {% else %}
+            <h1>Welcome, {{username}}</h1>
+        {% endif %}
+
+
+        {% if email|length != 0 %}
+            {% if "@" not in email or "." not in email or " " in email or email|length < 3 or email|length > 20 %}
+                <p>Please enter a valid email</p>
+            {% endif %}
+        {% endif %}
+
+    </body>
+</html>
